@@ -7,8 +7,8 @@ status: planned
 
 # Experiment Plan: [Experiment Name]
 
-## Hypothesis
-[What we expect to happen and why]
+## Hypothesis / Research Question
+[Supervised: What we expect to happen and why. Unsupervised: What structure or patterns are we looking for?]
 
 ## Background
 [Why this experiment? What prior work informs it?]
@@ -23,17 +23,18 @@ status: planned
 ### Features
 - **Feature set:** [Description or reference to feature list]
 - **New features:** [Any new features being tested]
-- **Leakage check:** [Confirmed clean / pending review]
+- **Leakage check:** [Supervised: confirmed clean / pending review. Unsupervised: N/A]
 
 ### Model
-- **Algorithm:** [What model(s) to train]
+- **Algorithm:** [What model(s) to train or compare]
 - **Hyperparameters:** [Starting values and search strategy]
-- **Baseline:** [What we're comparing against]
+- **Baseline:** [Supervised: what we're comparing against. Unsupervised: algorithm comparison protocol]
 
 ### Evaluation
-- **Primary metric:** [Metric name and why]
+- **Primary metric:** [Supervised: metric name and why. Unsupervised: internal metric (silhouette, Davies-Bouldin, explained variance)]
 - **Secondary metrics:** [List]
-- **Slices to evaluate:** [Important subgroups]
+- **Slices to evaluate:** [Supervised: important subgroups. Unsupervised: cluster profiles]
+- **Stability assessment:** [Unsupervised: resampling strategy for consistency check]
 
 ## Reproducibility
 - **Random seed:** [Value]

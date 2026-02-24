@@ -8,6 +8,10 @@ scipy>=1.11
 statsmodels>=0.14
 numpy>=1.24
 
+# Optional -- visualization (used by scikit-learn and statistical-analysis skills)
+# matplotlib>=3.7
+# seaborn>=0.12
+
 # Optional -- used in generated experiment code only
 # xgboost>=2.0
 # lightgbm>=4.0

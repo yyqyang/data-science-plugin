@@ -37,7 +37,9 @@ Use the `problem-framer` agent to structure the business question:
 
 ### 3. Approach Selection
 
-Propose 2-3 candidate approaches (e.g., "logistic regression baseline -> gradient boosting -> neural net") with trade-offs for each:
+Invoke the `scikit-learn` skill's `references/quick_reference.md` (Algorithm Selection cheat sheet) to map the problem type, dataset size, and constraints to candidate algorithms.
+
+Propose 2-3 candidate approaches with trade-offs for each:
 - Complexity vs. performance
 - Interpretability vs. accuracy
 - Development time vs. model sophistication

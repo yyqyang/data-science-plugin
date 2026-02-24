@@ -50,8 +50,8 @@ Which commands invoke which agents and skills:
 
 | Command | Agents | Skills |
 |---------|--------|--------|
-| `/ds:plan` | problem-framer | -- |
-| `/ds:eda` | data-profiler, feature-engineer | eda-checklist, target-leakage-detection, exploratory-data-analysis |
+| `/ds:plan` | problem-framer | scikit-learn |
+| `/ds:eda` | data-profiler, feature-engineer | eda-checklist, target-leakage-detection, exploratory-data-analysis, scikit-learn |
 | `/ds:experiment` | experiment-designer, model-evaluator | split-strategy, target-leakage-detection, statistical-analysis, scikit-learn, experiment-tracking |
 | `/ds:compound` | documentation-synthesizer | -- |
 

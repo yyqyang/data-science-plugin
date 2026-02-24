@@ -68,6 +68,8 @@ When target column is identified, invoke the `target-leakage-detection` skill to
 
 After distribution analysis, use the `feature-engineer` agent to suggest feature transformations based on the observed data characteristics.
 
+After suggestions are generated, reference the `scikit-learn` skill's `references/preprocessing.md` for concrete implementation patterns (scaling, encoding, imputation) matching the identified data characteristics.
+
 ### 7. Relationship Analysis (tabular path)
 
 Correlation matrix for numeric features, association tests for categoricals, target correlation ranking.

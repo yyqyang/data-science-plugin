@@ -45,6 +45,8 @@ Run the same check for optional libraries used in generated experiment code:
 python3 -c "
 import importlib
 optional = {
+    'matplotlib': 'matplotlib',
+    'seaborn': 'seaborn',
     'xgboost': 'xgboost',
     'lightgbm': 'lightgbm',
     'shap': 'shap',
@@ -72,7 +74,7 @@ List only the missing packages in the command. If all required libraries are pre
 For missing optional libraries, suggest but do not insist:
 
 ```
-uv pip install xgboost lightgbm shap
+uv pip install matplotlib seaborn xgboost lightgbm shap
 ```
 
 ## Rules

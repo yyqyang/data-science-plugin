@@ -19,10 +19,10 @@ The plugin's skills and agents use Python libraries for data analysis. Install t
 uv pip install pandas scikit-learn scipy statsmodels numpy
 ```
 
-Optional libraries (used in generated experiment code):
+Optional libraries (visualization and advanced models):
 
 ```bash
-uv pip install xgboost lightgbm shap
+uv pip install matplotlib seaborn xgboost lightgbm shap
 ```
 
 Run `/ds:setup` to check which libraries are installed.

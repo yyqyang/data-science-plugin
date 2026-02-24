@@ -4,6 +4,21 @@ All notable changes to this plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.5.0] - 2026-02-24
+
+### Added
+- Unsupervised experiment workflow in `/ds:experiment` -- routing step (1b) detects supervised vs. unsupervised, conditional text in steps 2, 3, 4, 7 for clustering and dimensionality reduction experiments
+- `scikit-learn` skill wired into `/ds:eda` (preprocessing patterns at step 6b) and `/ds:plan` (algorithm selection at step 3)
+- matplotlib and seaborn added to setup skill optional checks and requirements.txt
+
+### Fixed
+- Replaced broken `feature-importance` skill reference with inline scikit-learn guidance
+- Replaced broken `time-series-validation` skill reference with split-strategy + scikit-learn TimeSeriesSplit guidance
+
+### Changed
+- `experiment-designer` agent now supports both supervised and unsupervised experiment framing
+- `experiment-plan` template updated with unsupervised fields (research question, stability assessment, cluster profiles)
+
 ## [1.4.0] - 2026-02-24
 
 ### Added
