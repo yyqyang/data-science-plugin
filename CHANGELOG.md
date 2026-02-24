@@ -4,6 +4,18 @@ All notable changes to this plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.0] - 2026-02-24
+
+### Added
+- `matplotlib` skill -- API patterns for plot types, styling, multi-panel figures, and export with 4 reference files and 2 scripts
+- `/ds:eda` now uses `matplotlib` for distribution visualization (step 5) and correlation heatmaps (step 7)
+- `/ds:experiment` now uses `matplotlib` for code scaffold visualization boilerplate (step 6) and result plots across all three paradigms (step 7)
+
+### Changed
+- `data-profiler` agent now references `matplotlib` skill for visualization patterns
+- `model-evaluator` agent now references `matplotlib` skill for result figure composition
+- EDA report template and experiment result template updated with matplotlib visualization guidance
+
 ## [1.6.0] - 2026-02-24
 
 ### Added

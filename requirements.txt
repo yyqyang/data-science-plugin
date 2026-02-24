@@ -8,7 +8,7 @@ scipy>=1.11
 statsmodels>=0.14
 numpy>=1.24
 
-# Optional -- visualization (used by scikit-learn and statistical-analysis skills)
+# Optional -- visualization (used by matplotlib, scikit-learn, and statistical-analysis skills)
 # matplotlib>=3.7
 # seaborn>=0.12
 

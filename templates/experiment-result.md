@@ -23,6 +23,9 @@ outcome: [success | failure | mixed]
 |---|---|---|---|---|
 
 ### Key Plots
+<!-- Supervised: confusion matrix (scikit-learn ConfusionMatrixDisplay), learning curves, feature importance bar charts, residual plots. Use matplotlib skill for multi-panel composition. -->
+<!-- Unsupervised: cluster scatter plots with color-coded groups, elbow curves, silhouette plots. Use matplotlib skill's references/plot_types.md. -->
+<!-- Time-series: forecast vs actual line plots with prediction interval shading (matplotlib fill_between), diagnostic plots (statsmodels plot_diagnostics). -->
 [Description of important visualizations -- confusion matrix, PR curve, calibration plot, SHAP summary]
 
 ### Time-Series Forecast Performance (if applicable)

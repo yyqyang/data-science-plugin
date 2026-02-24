@@ -51,6 +51,13 @@ For each feature:
 - Categorical: value counts, rare categories
 - Temporal: time range, gaps, seasonality signals
 
+Generate distribution visualizations using the `matplotlib` skill's `references/plot_types.md`:
+- Histograms with density overlay for numeric features (Section 4)
+- Box plots for outlier visualization (Section 5)
+- Violin plots for distribution shape comparison across groups (Section 5)
+
+For standard statistical distribution comparison, prefer seaborn where available; fall back to matplotlib subplots for custom layouts. Save plots to the same output directory as the EDA report.
+
 ### 6. Data Quality Checks (tabular path)
 
 Apply the `eda-checklist` skill. Flag:
@@ -73,6 +80,10 @@ After suggestions are generated, reference the `scikit-learn` skill's `reference
 ### 7. Relationship Analysis (tabular path)
 
 Correlation matrix for numeric features, association tests for categoricals, target correlation ranking.
+
+Generate relationship visualizations using the `matplotlib` skill:
+- Correlation heatmap with annotations -- reference `references/plot_types.md` (Section 6, Correlation Matrix) or prefer `seaborn.heatmap()` for concise API
+- Scatter plots for top feature pairs -- reference `references/plot_types.md` (Section 2)
 
 #### 7a. Multicollinearity Check
 

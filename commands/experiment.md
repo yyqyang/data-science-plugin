@@ -120,6 +120,8 @@ When generating the code scaffold, use the `scikit-learn` skill's pipeline patte
 
 When the experiment uses statsmodels models (OLS, GLM, ARIMA), reference the `statsmodels` skill's Quick Start Guide and formula API examples in SKILL.md for code scaffold generation.
 
+Include matplotlib visualization boilerplate in the code scaffold. Use the `matplotlib` skill's OO interface convention (`fig, ax = plt.subplots(constrained_layout=True)`) and always close figures after saving (`plt.savefig()` + `plt.close(fig)`). Reference the `matplotlib` skill's `scripts/plot_template.py` for plot function structure.
+
 ### 7. Generate Results (if executing)
 
 After completion, generate `docs/ds/experiments/YYYY-MM-DD-<experiment-name>-result.md` from `templates/experiment-result.md` with:
@@ -143,6 +145,10 @@ After completion, generate `docs/ds/experiments/YYYY-MM-DD-<experiment-name>-res
   - Residual analysis and influence diagnostics from `references/stats_diagnostics.md`
   - Model comparison via AIC/BIC tables from `references/linear_models.md` or `references/glm.md`
   - Robust standard errors (HC, HAC) when assumption checks reveal heteroskedasticity
+- Use the `matplotlib` skill for result visualizations:
+  - Multi-panel summary figure combining key diagnostic plots -- reference `references/api_reference.md` (GridSpec)
+  - Custom residual plots and feature importance bar charts -- reference `references/plot_types.md`
+  - For standard scikit-learn display plots (`ConfusionMatrixDisplay`, `RocCurveDisplay`), use the scikit-learn skill; use matplotlib for customization and composition
 
 **Time-series results:**
 - Forecast accuracy metrics (RMSE, MAE, MAPE) on out-of-sample period vs. baseline
@@ -152,6 +158,10 @@ After completion, generate `docs/ds/experiments/YYYY-MM-DD-<experiment-name>-res
   - Information criteria comparison (AIC/BIC) across candidate models
 - Forecast visualization with prediction intervals
 - Stationarity verification on residuals (ADF test)
+- Use the `matplotlib` skill for forecast visualizations:
+  - Forecast vs actual line plots -- reference `references/plot_types.md` (Section 1, Line Plots)
+  - Prediction interval shading with `ax.fill_between()` -- reference `references/plot_types.md` (Section 11, Fill Between)
+  - For standard statsmodels diagnostic plots (`plot_diagnostics()`, `plot_acf`/`plot_pacf`), use the statsmodels skill; use matplotlib for custom compositions
 
 **Unsupervised results:**
 - Internal metrics (silhouette score, Davies-Bouldin, Calinski-Harabasz, inertia) across algorithms and hyperparameter settings
@@ -159,6 +169,10 @@ After completion, generate `docs/ds/experiments/YYYY-MM-DD-<experiment-name>-res
 - Visualization using PCA/t-SNE projection -- reference `scikit-learn` skill's `references/unsupervised_learning.md` and `scripts/clustering_analysis.py`
 - Cluster profiling: describe each cluster by its feature distributions
 - For dimensionality reduction: explained variance ratio, reconstruction error
+- Use the `matplotlib` skill for cluster and DR visualizations:
+  - Cluster scatter plots with color-coded groups -- reference `references/plot_types.md` (Section 2, Categorical Scatter)
+  - Elbow curves and silhouette plots -- reference `references/plot_types.md` (Section 1, Line Plots)
+  - For PCA/t-SNE projection code, use the scikit-learn skill; use matplotlib for rendering and styling
 
 ### 8. Experiment Tracking
 

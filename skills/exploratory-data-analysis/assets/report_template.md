@@ -125,12 +125,15 @@ Prior learnings from `docs/ds/learnings/` that informed this analysis:
 ## Visualizations
 
 ### Distribution Plots
+<!-- Use matplotlib skill's references/plot_types.md (Section 4: Histograms, Section 5: Box/Violin) for distribution visualization patterns. Prefer seaborn for multi-feature comparison. Save plots alongside this report. -->
 {DISTRIBUTION_PLOTS}
 
 ### Correlation Analysis
+<!-- Use matplotlib skill's references/plot_types.md (Section 6: Heatmaps, Correlation Matrix) or seaborn.heatmap() for correlation visualization. -->
 {CORRELATION_PLOTS}
 
 ### Time Series (if applicable)
+<!-- Use matplotlib skill's references/plot_types.md (Section 14: Time Series Plots) for temporal visualization patterns. -->
 {TIMESERIES_PLOTS}
 
 ---
