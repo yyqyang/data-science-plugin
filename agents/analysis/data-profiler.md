@@ -20,6 +20,8 @@ Generate code using pandas for profiling. Report findings in a structured markdo
 
 When generating visualization code, use the `matplotlib` skill's OO interface patterns (`fig, ax = plt.subplots(constrained_layout=True)`). Always save figures with `plt.savefig()` and close with `plt.close(fig)`. Reference the skill's `references/plot_types.md` for histogram, box plot, and heatmap patterns.
 
+When temporal columns are detected and data has a time-series structure (repeated measurements over time), suggest time-series feature extraction using the `aeon` skill's `references/transformations.md`: Catch22 for an interpretable 22-feature summary of each series, ROCKET/MiniROCKET for fast scalable feature extraction suitable for downstream ML. Reference `references/distances.md` for DTW-based similarity profiling between series.
+
 <examples>
   <example>
     <context>User has loaded a CSV and wants to understand it</context>

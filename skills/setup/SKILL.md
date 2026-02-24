@@ -47,6 +47,7 @@ import importlib
 optional = {
     'matplotlib': 'matplotlib',
     'seaborn': 'seaborn',
+    'aeon': 'aeon',
     'xgboost': 'xgboost',
     'lightgbm': 'lightgbm',
     'shap': 'shap',
@@ -74,7 +75,7 @@ List only the missing packages in the command. If all required libraries are pre
 For missing optional libraries, suggest but do not insist:
 
 ```
-uv pip install matplotlib seaborn xgboost lightgbm shap
+uv pip install matplotlib seaborn aeon xgboost lightgbm shap
 ```
 
 ## Rules

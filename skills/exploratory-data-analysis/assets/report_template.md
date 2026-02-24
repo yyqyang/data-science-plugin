@@ -134,6 +134,7 @@ Prior learnings from `docs/ds/learnings/` that informed this analysis:
 
 ### Time Series (if applicable)
 <!-- Use matplotlib skill's references/plot_types.md (Section 14: Time Series Plots) for temporal visualization patterns. -->
+<!-- For time-series feature extraction (Catch22, ROCKET), reference the aeon skill's references/transformations.md. For change point detection, reference references/segmentation.md (ClaSP, FLUSS). For time-series similarity, reference references/distances.md (DTW). -->
 {TIMESERIES_PLOTS}
 
 ---

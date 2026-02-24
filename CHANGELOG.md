@@ -4,6 +4,25 @@ All notable changes to this plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.8.0] - 2026-02-24
+
+### Added
+- `aeon` skill -- API patterns for time series machine learning (classification, regression, clustering, anomaly detection, segmentation, similarity search, distance metrics) with 11 reference files
+- Three new experiment paradigms in `/ds:experiment` -- temporal supervised (time-series classification/regression), temporal unsupervised (time-series clustering), and anomaly detection, extending routing from 3 to 6 paradigms
+- `/ds:experiment` now uses `aeon` for algorithm selection (step 3), code scaffolding (step 6), and evaluation (step 7) across all new paradigms
+- `/ds:eda` now uses `aeon` for temporal feature extraction suggestions (step 5) and time-series similarity/segmentation analysis (step 7b)
+- `/ds:plan` now uses `aeon` for time-series ML algorithm selection (step 3)
+- Temporal supervised, temporal unsupervised, and anomaly detection fields added to `experiment-plan` and `experiment-result` templates
+
+### Changed
+- `experiment-designer` agent now supports temporal supervised and anomaly detection experiment framing with 2 new examples
+- `model-evaluator` agent now references `aeon` for range-based metrics, clustering accuracy, and statistical comparison (Wilcoxon, Nemenyi)
+- `data-profiler` agent now references `aeon` for temporal feature extraction (Catch22, ROCKET)
+- `feature-engineer` agent now includes time-series feature candidates from `aeon` transformations
+- `statsmodels` and `scikit-learn` skill "Role in ds plugin" paragraphs updated with `aeon` boundary clarification
+- EDA report template updated with `aeon` references for temporal analysis
+- Time-series forecasting path enhanced with `aeon` ML-based forecaster alternatives (TCN, DeepAR)
+
 ## [1.7.0] - 2026-02-24
 
 ### Added

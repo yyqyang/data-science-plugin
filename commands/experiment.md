@@ -26,8 +26,16 @@ Surface what was tried before and what worked/failed.
 
 Determine the experiment type:
 - **Supervised** (classification, regression) -- has a target variable, cross-sectional data. Proceed to step 2.
-- **Unsupervised** (clustering, dimensionality reduction) -- no target variable. Use unsupervised variants of steps 2-7 as noted below.
-- **Time-series** (forecasting, temporal modeling) -- target is future values of a time-ordered variable. Use time-series variants of steps 2-7 as noted below.
+- **Temporal supervised** (time-series classification, time-series regression) -- input features are time series (3D shape: samples x channels x timepoints), target is a class label or continuous value. Use temporal supervised variants of steps 2-7 as noted below. Reference the `aeon` skill.
+- **Unsupervised** (clustering, dimensionality reduction) -- no target variable, cross-sectional data. Use unsupervised variants of steps 2-7 as noted below.
+- **Temporal unsupervised** (time-series clustering) -- input is a collection of unlabeled time series. Use temporal unsupervised variants of steps 2-7 as noted below. Reference the `aeon` skill.
+- **Time-series forecasting** (forecasting, temporal modeling) -- target is future values of a time-ordered variable. Use time-series variants of steps 2-7 as noted below.
+- **Anomaly detection** -- input is one or more time series, goal is to identify unusual points, subsequences, or series. Use anomaly detection variants of steps 2-7 as noted below. Reference the `aeon` skill.
+
+Detection heuristics:
+- Temporal supervised: user mentions "classify time series", "time series classification/regression", or data has shape (samples, channels, timepoints)
+- Temporal unsupervised: user mentions "cluster time series", "group similar series", or "time series clustering"
+- Anomaly detection: user mentions "anomaly", "outlier", "unusual pattern", "discord", or "change point"
 
 If unclear from the experiment description, ask the user.
 
@@ -46,10 +54,25 @@ Use the `experiment-designer` agent.
 - What structure or patterns are expected and why
 - Controls (what's held constant across algorithm comparisons)
 
-**Time-series:**
+**Temporal supervised:**
+- Classification/regression hypothesis (e.g., "ROCKET will classify ECG signals with >90% accuracy, outperforming 1-NN Euclidean baseline")
+- What temporal patterns distinguish the classes or predict the target
+- Data format confirmation: `(n_samples, n_channels, n_timepoints)`
+
+**Temporal unsupervised:**
+- Clustering hypothesis (e.g., "DTW-based k-means with k=5 will reveal distinct operational regimes in sensor data")
+- What temporal structure is expected and why
+- Distance metric rationale (DTW for alignment, Euclidean for speed)
+
+**Time-series forecasting:**
 - Forecasting hypothesis (e.g., "SARIMAX(1,1,1)(1,1,0,12) will outperform exponential smoothing for monthly sales, measured by out-of-sample RMSE")
 - What temporal patterns are expected (trend, seasonality, cycles)
 - Forecast horizon and granularity
+
+**Anomaly detection:**
+- Detection hypothesis (e.g., "STOMP with window_size=50 will identify >80% of known anomalies with <5% false positive rate")
+- What constitutes an anomaly in this domain (point, subsequence, or collection-level)
+- Whether labeled anomaly examples are available (semi-supervised vs unsupervised)
 
 ### 3. Methodology Design
 
@@ -69,13 +92,36 @@ Use the `experiment-designer` agent.
 - **Internal evaluation metrics** -- silhouette score, Davies-Bouldin index, Calinski-Harabasz index, explained variance ratio (for DR)
 - **Algorithm comparison protocol** -- how to rank algorithms against each other
 
-**Time-series -- define:**
+**Temporal supervised -- define:**
+- **Data format verification** -- confirm 3D shape `(n_samples, n_channels, n_timepoints)`. Reference `aeon` skill's SKILL.md "Data Preparation" section. If tabular, reshape: `X.values.reshape(n_samples, 1, -1)`
+- **Algorithm selection** -- reference `aeon` skill's `references/classification.md` (or `references/regression.md`). Algorithm selection guide: MiniROCKET for speed, HIVECOTEV2/InceptionTime for accuracy, ShapeletTransform/Catch22 for interpretability, KNeighborsTimeSeries with DTW for small datasets
+- **Feature extraction alternative** -- if converting to tabular for traditional ML, reference `aeon` skill's `references/transformations.md` (ROCKET, Catch22, TSFresh) then use scikit-learn classifiers
+- **Distance metric selection** -- for distance-based methods, reference `aeon` skill's `references/distances.md` for DTW, LCSS, ERP, etc.
+- **Split strategy** -- invoke `split-strategy` skill. For temporal classification, standard stratified splits are acceptable (unlike forecasting which requires temporal splits)
+- **Evaluation metrics** -- standard classification/regression metrics from scikit-learn. Reference `aeon` skill's `references/datasets_benchmarking.md` for comparison with published results on standard datasets
+- **Baseline** -- 1-NN with Euclidean distance (standard time-series classification baseline)
+
+**Temporal unsupervised -- define:**
+- **Algorithm selection** -- reference `aeon` skill's `references/clustering.md`. Algorithm selection guide: TimeSeriesKMeans with DTW for alignment-based, Catch22Clusterer for interpretability, deep learning clusterers for complex patterns, TimeSeriesCLARA for large datasets
+- **Distance metric** -- reference `aeon` skill's `references/distances.md`. Critical choice for clustering quality. DTW for temporal alignment, Euclidean for speed, LCSS for outlier robustness
+- **Averaging method** -- barycentric averaging (`ba`) for DTW-based clustering, shift-invariant for phase-shifted series
+- **Internal metrics** -- silhouette score, Davies-Bouldin, clustering accuracy (if ground truth available) from `aeon` skill's `references/datasets_benchmarking.md`
+- **Algorithm comparison protocol** -- how to rank algorithms against each other
+
+**Time-series forecasting -- define:**
 - **Stationarity assessment** -- ADF and KPSS tests. Reference `statsmodels` skill's `references/time_series.md`
 - **Temporal split strategy** -- invoke `split-strategy` skill with temporal mode. Reference `scikit-learn` skill's `references/model_evaluation.md` (TimeSeriesSplit) for expanding/sliding window splits
 - **Model identification** -- ACF/PACF analysis for ARIMA order selection. Reference `statsmodels` skill's `references/time_series.md`
-- **Model(s) to evaluate** -- ARIMA, SARIMAX, Exponential Smoothing, or VAR. Use `statsmodels` skill's SKILL.md Quick Start and `references/time_series.md`
+- **Model(s) to evaluate** -- ARIMA, SARIMAX, Exponential Smoothing, or VAR. Use `statsmodels` skill's SKILL.md Quick Start and `references/time_series.md`. When classical models are insufficient, reference `aeon` skill's `references/forecasting.md` for ML-based alternatives: TCNForecaster for long sequences, DeepARNetwork for probabilistic forecasts, RegressionForecaster for using any regressor as a forecaster
 - **Forecast evaluation metrics** -- RMSE, MAE, MAPE on out-of-sample period
 - **Baseline** -- naive forecast (last value or seasonal naive)
+
+**Anomaly detection -- define:**
+- **Anomaly type** -- point, subsequence (discord), or collection-level. Reference `aeon` skill's `references/anomaly_detection.md` "Point vs Subsequence Anomalies" section
+- **Algorithm selection** -- reference `aeon` skill's `references/anomaly_detection.md` algorithm selection guide: STOMP for discord discovery, IsolationForest for no-training-data, ROCKAD for semi-supervised, LeftSTAMPi for streaming, COPOD for multi-dimensional
+- **Window size** -- critical parameter for matrix profile methods (rule of thumb: 10-20% of series length). Reference `aeon` skill's `references/similarity_search.md` best practices
+- **Threshold strategy** -- percentile-based, domain-specific, or statistical
+- **Evaluation metrics** -- range-based precision/recall/F1 from `aeon` skill's `references/datasets_benchmarking.md`, ROC AUC for scored output
 
 Invoke the `statistical-analysis` skill for:
 - **Test selection**: Use `references/test_selection_guide.md` to choose the right statistical test for the comparison protocol
@@ -95,13 +141,17 @@ Invoke the `statsmodels` skill when the experiment involves inference or time-se
 
 If temporal data is detected, use the `split-strategy` skill with temporal mode and reference the `scikit-learn` skill's `references/model_evaluation.md` (TimeSeriesSplit section) for time-aware cross-validation.
 
-### 4. Leakage Check (supervised and time-series)
+### 4. Leakage Check (supervised, temporal supervised, time-series forecasting)
 
 **Supervised:** Invoke `target-leakage-detection` skill on the proposed feature set.
 
-**Time-series:** Invoke `target-leakage-detection` skill with temporal focus -- check that no future information leaks into training features. Verify that the temporal split boundary is respected.
+**Temporal supervised:** Invoke `target-leakage-detection` skill -- check that normalization/transformation parameters are fit on training data only (aeon best practice: `fit_transform` on train, `transform` on test).
 
-**Unsupervised:** Skip this step (no target variable).
+**Time-series forecasting:** Invoke `target-leakage-detection` skill with temporal focus -- check that no future information leaks into training features. Verify that the temporal split boundary is respected.
+
+**Unsupervised / Temporal unsupervised:** Skip this step (no target variable).
+
+**Anomaly detection:** Skip traditional leakage check. For semi-supervised methods (ROCKAD, OneClassSVM), verify that labeled anomaly examples are not used during training -- only normal data should be used for fitting.
 
 ### 5. Write Experiment Plan
 
@@ -119,6 +169,15 @@ Ask the user: "Experiment plan ready. What next?" with options:
 When generating the code scaffold, use the `scikit-learn` skill's pipeline patterns (`references/pipelines_and_composition.md`) and the example scripts (`scripts/classification_pipeline.py` or `scripts/clustering_analysis.py`) as structural references.
 
 When the experiment uses statsmodels models (OLS, GLM, ARIMA), reference the `statsmodels` skill's Quick Start Guide and formula API examples in SKILL.md for code scaffold generation.
+
+When the experiment uses aeon time-series ML (temporal supervised, temporal unsupervised, anomaly detection), reference the `aeon` skill's SKILL.md "Common Workflows" section for pipeline structure. Use aeon import patterns:
+- Classification: `from aeon.classification.convolution_based import RocketClassifier`
+- Clustering: `from aeon.clustering import TimeSeriesKMeans`
+- Anomaly detection: `from aeon.anomaly_detection import STOMP`
+- Transformations: `from aeon.transformations.collection.convolution_based import RocketTransformer`
+Include data format comments: `# Shape: (n_samples, n_channels, n_timepoints)`
+
+When the time-series forecasting experiment uses ML-based forecasters, reference the `aeon` skill's `references/forecasting.md` for TCNForecaster, DeepARNetwork, or RegressionForecaster patterns.
 
 Include matplotlib visualization boilerplate in the code scaffold. Use the `matplotlib` skill's OO interface convention (`fig, ax = plt.subplots(constrained_layout=True)`) and always close figures after saving (`plt.savefig()` + `plt.close(fig)`). Reference the `matplotlib` skill's `scripts/plot_template.py` for plot function structure.
 
@@ -150,18 +209,49 @@ After completion, generate `docs/ds/experiments/YYYY-MM-DD-<experiment-name>-res
   - Custom residual plots and feature importance bar charts -- reference `references/plot_types.md`
   - For standard scikit-learn display plots (`ConfusionMatrixDisplay`, `RocCurveDisplay`), use the scikit-learn skill; use matplotlib for customization and composition
 
-**Time-series results:**
+**Temporal supervised results:**
+- Standard classification/regression metrics (accuracy, F1, RMSE) from scikit-learn
+- Use the `model-evaluator` agent for comprehensive performance assessment
+- Comparison with published benchmarks if using standard datasets -- reference `aeon` skill's `references/datasets_benchmarking.md` for `get_estimator_results()`
+- Algorithm comparison with statistical testing (Wilcoxon, Nemenyi) from `aeon` skill's `references/datasets_benchmarking.md`
+- For interpretable models: feature importance from Catch22 features, shapelet visualization for ShapeletTransformClassifier
+- Use the `matplotlib` skill for result visualizations:
+  - Confusion matrix (scikit-learn `ConfusionMatrixDisplay`), per-class accuracy bar charts
+  - Time series examples from each class overlaid for visual comparison
+  - For standard scikit-learn display plots, use the scikit-learn skill; use matplotlib for custom composition
+
+**Temporal unsupervised results:**
+- Internal metrics (silhouette score, Davies-Bouldin, clustering accuracy if ground truth available) from `aeon` skill's `references/datasets_benchmarking.md`
+- Cluster center visualization: plot the average (barycentric) time series for each cluster
+- Cluster profiling: describe each cluster by its temporal characteristics (shape, amplitude, frequency)
+- Stability analysis: how consistent are clusters across resampling runs?
+- Use the `matplotlib` skill for cluster visualizations:
+  - Plot cluster centers as line plots (one line per cluster, color-coded)
+  - Elbow curves and silhouette analysis
+
+**Time-series forecasting results:**
 - Forecast accuracy metrics (RMSE, MAE, MAPE) on out-of-sample period vs. baseline
 - Use the `statsmodels` skill's diagnostic patterns:
   - Residual diagnostics from `references/stats_diagnostics.md` (Ljung-Box, heteroskedasticity)
   - Model diagnostic plots (`results.plot_diagnostics()`) from `references/time_series.md`
   - Information criteria comparison (AIC/BIC) across candidate models
+- When using aeon ML-based forecasters, include aeon-specific evaluation metrics from `aeon` skill's `references/forecasting.md`
 - Forecast visualization with prediction intervals
 - Stationarity verification on residuals (ADF test)
 - Use the `matplotlib` skill for forecast visualizations:
   - Forecast vs actual line plots -- reference `references/plot_types.md` (Section 1, Line Plots)
   - Prediction interval shading with `ax.fill_between()` -- reference `references/plot_types.md` (Section 11, Fill Between)
   - For standard statsmodels diagnostic plots (`plot_diagnostics()`, `plot_acf`/`plot_pacf`), use the statsmodels skill; use matplotlib for custom compositions
+
+**Anomaly detection results:**
+- Range-based precision, recall, F-score from `aeon` skill's `references/datasets_benchmarking.md` (`range_precision`, `range_recall`, `range_f_score`)
+- ROC AUC for scored anomaly detection
+- Threshold sensitivity analysis: how do metrics change across threshold values?
+- Visualization: time series with anomaly scores overlay, threshold line, detected anomaly regions highlighted
+- Use the `matplotlib` skill for anomaly visualizations:
+  - Two-panel figure: time series on top, anomaly scores below -- reference `references/api_reference.md` (subplots)
+  - Highlight anomalous regions with `ax.axvspan()` or `ax.fill_between()`
+  - Follow DS plugin conventions: savefig + close, no plt.show
 
 **Unsupervised results:**
 - Internal metrics (silhouette score, Davies-Bouldin, Calinski-Harabasz, inertia) across algorithms and hyperparameter settings

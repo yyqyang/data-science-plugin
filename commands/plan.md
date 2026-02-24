@@ -41,8 +41,10 @@ Invoke the `scikit-learn` skill's `references/quick_reference.md` (Algorithm Sel
 
 When the problem involves **inference** (need p-values, causal interpretation), **GLM** (non-normal outcomes), or **time-series forecasting**, invoke the `statsmodels` skill:
 - Inference/regression: `references/linear_models.md` and `references/glm.md` for model selection
-- Time-series: `references/time_series.md` for forecasting model selection
+- Time-series forecasting: `references/time_series.md` for forecasting model selection
 - Discrete outcomes: `references/discrete_choice.md` for count/categorical model selection
+
+When the problem involves **time-series classification or regression** (labeled temporal data), invoke the `aeon` skill's SKILL.md "Algorithm Selection Guide" to map the problem to candidate algorithms based on dataset size, accuracy requirements, and interpretability needs. When the problem involves **anomaly detection in time series**, invoke the `aeon` skill's `references/anomaly_detection.md` for algorithm selection. When the problem involves **time-series clustering**, invoke the `aeon` skill's `references/clustering.md` for algorithm selection.
 
 Propose 2-3 candidate approaches with trade-offs for each:
 - Complexity vs. performance

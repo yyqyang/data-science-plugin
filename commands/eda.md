@@ -58,6 +58,8 @@ Generate distribution visualizations using the `matplotlib` skill's `references/
 
 For standard statistical distribution comparison, prefer seaborn where available; fall back to matplotlib subplots for custom layouts. Save plots to the same output directory as the EDA report.
 
+When temporal columns are detected, suggest time-series feature extraction using the `aeon` skill's `references/transformations.md`: Catch22 for an interpretable 22-feature summary of each series, ROCKET/MiniROCKET for fast scalable feature extraction suitable for downstream ML.
+
 ### 6. Data Quality Checks (tabular path)
 
 Apply the `eda-checklist` skill. Flag:
@@ -92,6 +94,8 @@ Compute VIF (variance inflation factor) for numeric features. Reference the `sta
 #### 7b. Stationarity Testing (if temporal columns detected)
 
 If temporal columns were identified in step 5, test for stationarity using ADF and KPSS tests. Reference the `statsmodels` skill's `references/time_series.md` for stationarity testing patterns.
+
+If multiple time series are present, suggest time-series similarity analysis using the `aeon` skill's `references/distances.md` for DTW pairwise distance computation. If change points are suspected, reference the `aeon` skill's `references/segmentation.md` for ClaSP or FLUSS segmenters to detect regime changes.
 
 ### 8. Write Artifact
 

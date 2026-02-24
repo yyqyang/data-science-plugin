@@ -1,6 +1,6 @@
 # Data Science Plugin
 
-Data science and ML workflow tools that compound institutional knowledge. 6 agents, 4 commands, 10 skills for problem framing, EDA, experimentation, and knowledge compounding.
+Data science and ML workflow tools that compound institutional knowledge. 6 agents, 4 commands, 11 skills for problem framing, EDA, experimentation, and knowledge compounding.
 
 ## Install
 
@@ -22,7 +22,7 @@ uv pip install pandas scikit-learn scipy statsmodels numpy
 Optional libraries (visualization and advanced models):
 
 ```bash
-uv pip install matplotlib seaborn xgboost lightgbm shap
+uv pip install matplotlib seaborn aeon xgboost lightgbm shap
 ```
 
 Run `/ds:setup` to check which libraries are installed.
@@ -48,7 +48,7 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 |-----------|-------|
 | Agents | 6 |
 | Commands | 4 |
-| Skills | 10 |
+| Skills | 11 |
 | Templates | 5 |
 | MCP Servers | 1 |
 
@@ -97,6 +97,7 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 | `statsmodels` | Statsmodels API patterns for OLS, GLM, discrete choice, time series (ARIMA/SARIMAX), and diagnostics |
 | `matplotlib` | Matplotlib API patterns for creating publication-quality visualizations, multi-panel figures, and plot styling |
 | `setup` | Check Python environment for required DS/ML libraries and report versions |
+| `aeon` | Aeon API patterns for time series ML -- classification, regression, clustering, anomaly detection, segmentation, and similarity search |
 | `exploratory-data-analysis` | Detect file types and perform format-specific EDA across 200+ scientific formats |
 
 ## Templates

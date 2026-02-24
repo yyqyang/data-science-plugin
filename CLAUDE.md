@@ -50,9 +50,9 @@ Which commands invoke which agents and skills:
 
 | Command | Agents | Skills |
 |---------|--------|--------|
-| `/ds:plan` | problem-framer | scikit-learn, statsmodels |
-| `/ds:eda` | data-profiler, feature-engineer | eda-checklist, target-leakage-detection, exploratory-data-analysis, scikit-learn, statsmodels, matplotlib |
-| `/ds:experiment` | experiment-designer, model-evaluator | split-strategy, target-leakage-detection, statistical-analysis, scikit-learn, experiment-tracking, statsmodels, matplotlib |
+| `/ds:plan` | problem-framer | scikit-learn, statsmodels, aeon |
+| `/ds:eda` | data-profiler, feature-engineer | eda-checklist, target-leakage-detection, exploratory-data-analysis, scikit-learn, statsmodels, matplotlib, aeon |
+| `/ds:experiment` | experiment-designer, model-evaluator | split-strategy, target-leakage-detection, statistical-analysis, scikit-learn, experiment-tracking, statsmodels, matplotlib, aeon |
 | `/ds:compound` | documentation-synthesizer | -- |
 
 ## Naming Conventions

@@ -39,6 +39,21 @@ outcome: [success | failure | mixed]
 | ADF (residuals) | | | |
 | Breusch-Pagan | | | |
 
+### Temporal Supervised Performance (if applicable)
+<!-- Use scikit-learn displays for confusion matrix, matplotlib skill for multi-panel figures. Compare with published benchmarks via aeon's references/datasets_benchmarking.md. -->
+| Algorithm | Accuracy | F1 | vs 1-NN Euclidean | vs Published Benchmark |
+|---|---|---|---|---|
+
+### Anomaly Detection Performance (if applicable)
+<!-- Use range-based metrics from aeon evaluation. Visualize time series with anomaly score overlay using matplotlib skill (savefig + close, no plt.show). -->
+| Algorithm | Range-Precision | Range-Recall | Range-F1 | ROC AUC | Threshold |
+|---|---|---|---|---|---|
+
+### Temporal Unsupervised Performance (if applicable)
+<!-- Visualize cluster centers (average time series per cluster) using matplotlib skill. -->
+| Algorithm | k | Silhouette | Davies-Bouldin | Clustering Accuracy |
+|---|---|---|---|---|
+
 ## Analysis
 [What worked, what didn't, why]
 

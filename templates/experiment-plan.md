@@ -29,15 +29,23 @@ status: planned
 ### Model
 - **Algorithm:** [What model(s) to train or compare]
 - **Hyperparameters:** [Starting values and search strategy]
-- **Model order:** [Time-series: ARIMA (p,d,q), seasonal (P,D,Q,s), or ETS parameters]
-- **Forecast horizon:** [Time-series: number of steps ahead to predict]
-- **Baseline:** [Supervised: what we're comparing against. Unsupervised: algorithm comparison protocol. Time-series: naive or seasonal naive forecast]
+- **Model order:** [Time-series forecasting: ARIMA (p,d,q), seasonal (P,D,Q,s), or ETS parameters]
+- **Forecast horizon:** [Time-series forecasting: number of steps ahead to predict]
+- **Data format:** [Temporal supervised: confirmed (n_samples, n_channels, n_timepoints) shape]
+- **Distance metric:** [Temporal supervised/unsupervised: DTW, Euclidean, LCSS, etc.]
+- **Algorithm category:** [Temporal supervised: convolution-based, distance-based, shapelet, deep learning, hybrid]
+- **Averaging method:** [Temporal unsupervised: barycentric, shift-invariant, etc.]
+- **Anomaly type:** [Anomaly detection: point, subsequence, or collection-level]
+- **Window size:** [Anomaly detection: for matrix profile methods]
+- **Threshold strategy:** [Anomaly detection: percentile, domain-specific, or statistical]
+- **Detection approach:** [Anomaly detection: semi-supervised (labeled normal data) or unsupervised]
+- **Baseline:** [Supervised: what we're comparing against. Unsupervised: algorithm comparison protocol. Time-series: naive or seasonal naive forecast. Temporal supervised: 1-NN Euclidean distance]
 
 ### Evaluation
-- **Primary metric:** [Supervised: metric name and why. Unsupervised: internal metric (silhouette, Davies-Bouldin, explained variance). Time-series: forecast accuracy metric (RMSE, MAE, MAPE)]
+- **Primary metric:** [Supervised: metric name and why. Unsupervised: internal metric (silhouette, Davies-Bouldin, explained variance). Time-series forecasting: forecast accuracy metric (RMSE, MAE, MAPE). Temporal supervised: accuracy, F1. Anomaly detection: range-based F-score, ROC AUC]
 - **Secondary metrics:** [List]
 - **Slices to evaluate:** [Supervised: important subgroups. Unsupervised: cluster profiles]
-- **Stability assessment:** [Unsupervised: resampling strategy for consistency check]
+- **Stability assessment:** [Unsupervised/temporal unsupervised: resampling strategy for consistency check]
 
 ## Reproducibility
 - **Random seed:** [Value]
