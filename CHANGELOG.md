@@ -4,6 +4,19 @@ All notable changes to this plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.0] - 2026-02-24
+
+### Changed
+- Replaced `statistical-tests` skill with comprehensive `statistical-analysis` skill -- adds assumption checking script, Bayesian methods, APA reporting templates, power analysis, and 5 reference files
+- `/ds:experiment` now uses `statistical-analysis` for test selection, power analysis, assumption verification, and APA-formatted reporting
+
+## [1.2.0] - 2026-02-24
+
+### Added
+- `exploratory-data-analysis` skill -- file type detection and format-specific EDA for 200+ scientific formats, with analyzer script, report template, and 6 format reference files
+- File type detection step in `/ds:eda` command workflow
+- Structured report template reference in `/ds:eda` artifact output
+
 ## [1.1.0] - 2026-02-24
 
 ### Added

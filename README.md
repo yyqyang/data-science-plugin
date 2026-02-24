@@ -1,6 +1,6 @@
 # Data Science Plugin
 
-Data science and ML workflow tools that compound institutional knowledge. 6 agents, 4 commands, 6 skills for problem framing, EDA, experimentation, and knowledge compounding.
+Data science and ML workflow tools that compound institutional knowledge. 6 agents, 4 commands, 7 skills for problem framing, EDA, experimentation, and knowledge compounding.
 
 ## Install
 
@@ -48,7 +48,7 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 |-----------|-------|
 | Agents | 6 |
 | Commands | 4 |
-| Skills | 6 |
+| Skills | 7 |
 | Templates | 5 |
 | MCP Servers | 1 |
 
@@ -92,8 +92,9 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 | `split-strategy` | Train/validation/test split decision tree based on data characteristics |
 | `target-leakage-detection` | Detect temporal, direct, and group leakage in feature sets |
 | `experiment-tracking` | Standard experiment logging format with environment and reproducibility fields |
-| `statistical-tests` | Statistical test selection guide based on data type and hypothesis |
+| `statistical-analysis` | Guided statistical analysis with test selection, assumption checking, power analysis, and APA reporting |
 | `setup` | Check Python environment for required DS/ML libraries and report versions |
+| `exploratory-data-analysis` | Detect file types and perform format-specific EDA across 200+ scientific formats |
 
 ## Templates
 

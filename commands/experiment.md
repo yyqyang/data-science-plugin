@@ -40,7 +40,10 @@ Define:
 - **Evaluation metrics** (primary + secondary)
 - **Baseline to beat**
 
-Invoke `statistical-tests` skill when designing the comparison protocol.
+Invoke the `statistical-analysis` skill for:
+- **Test selection**: Use `references/test_selection_guide.md` to choose the right statistical test for the comparison protocol
+- **Power analysis**: Determine minimum sample size needed to detect the expected effect size
+- **Assumption planning**: Note which assumptions will need checking after results are in
 
 If temporal data is detected, auto-invoke `time-series-validation` skill.
 
@@ -71,6 +74,11 @@ After completion, generate `docs/ds/experiments/YYYY-MM-DD-<experiment-name>-res
 - Key observations
 
 Use the `model-evaluator` agent for comprehensive performance assessment.
+
+Run the `statistical-analysis` skill's assumption checks on the results:
+- Use `scripts/assumption_checks.py` to verify normality and variance homogeneity of residuals/predictions
+- Report results in APA format using `references/reporting_standards.md`
+- Calculate and report effect sizes with confidence intervals
 
 Invoke `feature-importance` skill alongside model-evaluator for feature attribution analysis.
 
