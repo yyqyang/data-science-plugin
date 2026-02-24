@@ -1884,36 +1884,36 @@ MIT
 **Goal:** Core workflow loop with the most common entry points.
 
 **Scope:**
-- [ ] Plugin scaffold (`.claude-plugin/plugin.json` with `"name": "ds"`, `CLAUDE.md`, `README.md`, `CHANGELOG.md`)
-- [ ] 4 commands: `/ds:plan`, `/ds:eda`, `/ds:experiment`, `/ds:compound` (all with `disable-model-invocation: true`)
-- [ ] 6 agents: `problem-framer`, `data-profiler`, `feature-engineer`, `experiment-designer`, `model-evaluator`, `documentation-synthesizer` (all with `<examples>` blocks)
-- [ ] 5 skills: `eda-checklist`, `split-strategy`, `target-leakage-detection`, `experiment-tracking`, `statistical-tests`
-- [ ] 5 templates: `problem-framing.md`, `dataset-assessment.md`, `experiment-plan.md`, `experiment-result.md`, `postmortem.md`
-- [ ] Compounding mechanism: `docs/ds/learnings/` with enhanced YAML frontmatter (findings array, lifecycle_stage, deduplication gate), and relevance-ranked search
-- [ ] Command files use subdirectory pattern: `commands/ds/plan.md`, `commands/ds/eda.md`, etc.
-- [ ] All output consolidated under `docs/ds/` (plans, eda, experiments, learnings subdirectories)
+- [x] Plugin scaffold (`.claude-plugin/plugin.json` with `"name": "ds"`, `CLAUDE.md`, `README.md`, `CHANGELOG.md`)
+- [x] 4 commands: `/ds:plan`, `/ds:eda`, `/ds:experiment`, `/ds:compound` (all with `disable-model-invocation: true`)
+- [x] 6 agents: `problem-framer`, `data-profiler`, `feature-engineer`, `experiment-designer`, `model-evaluator`, `documentation-synthesizer` (all with `<examples>` blocks)
+- [x] 5 skills: `eda-checklist`, `split-strategy`, `target-leakage-detection`, `experiment-tracking`, `statistical-tests`
+- [x] 5 templates: `problem-framing.md`, `dataset-assessment.md`, `experiment-plan.md`, `experiment-result.md`, `postmortem.md`
+- [x] Compounding mechanism: `docs/ds/learnings/` with enhanced YAML frontmatter (findings array, lifecycle_stage, deduplication gate), and relevance-ranked search
+- [x] Command files use subdirectory pattern: `commands/ds/plan.md`, `commands/ds/eda.md`, etc.
+- [x] All output consolidated under `docs/ds/` (plans, eda, experiments, learnings subdirectories)
 
 **Why this subset:** Covers Plan → EDA → Experiment → Compound — the most natural DS workflow. EDA is the most common entry point for data scientists, so including it in MVP ensures the plugin is useful on day one. `feature-engineer` moved to MVP because `/ds:eda` invokes it (step 5b) — shipping `/ds:eda` without `feature-engineer` would leave a dead reference.
 
 **Acceptance Criteria:**
-- [ ] `/ds:plan` with no learnings produces a valid problem framing doc
-- [ ] `/ds:plan` with existing learnings surfaces relevant ones in output
-- [ ] `/ds:eda` profiles a CSV/Parquet file and produces an EDA report
-- [ ] `/ds:eda` flags leakage suspects when target column is identified
-- [ ] `/ds:eda` invokes `feature-engineer` after distribution analysis
-- [ ] `/ds:experiment` generates an experiment plan with split strategy and leakage check
-- [ ] `/ds:experiment` invokes `model-evaluator` when generating result reports
-- [ ] `/ds:experiment` logs environment, data hash, and git commit in experiment records
-- [ ] `/ds:compound` runs deduplication gate (searches existing learnings before writing)
-- [ ] `/ds:compound` validates YAML frontmatter against enhanced schema before writing
-- [ ] `/ds:compound` writes properly frontmattered files to `docs/ds/learnings/`
-- [ ] Cold start works (no `docs/ds/` directory yet — auto-created via `mkdir -p`)
-- [ ] Large dataset handling: `/ds:eda` samples when >100MB
-- [ ] All 6 agents have `<examples>` blocks (verified by grep)
-- [ ] All 4 commands have `disable-model-invocation: true` and use `$ARGUMENTS`
-- [ ] Plugin `name` is `"ds"` in plugin.json
+- [x] `/ds:plan` with no learnings produces a valid problem framing doc
+- [x] `/ds:plan` with existing learnings surfaces relevant ones in output
+- [x] `/ds:eda` profiles a CSV/Parquet file and produces an EDA report
+- [x] `/ds:eda` flags leakage suspects when target column is identified
+- [x] `/ds:eda` invokes `feature-engineer` after distribution analysis
+- [x] `/ds:experiment` generates an experiment plan with split strategy and leakage check
+- [x] `/ds:experiment` invokes `model-evaluator` when generating result reports
+- [x] `/ds:experiment` logs environment, data hash, and git commit in experiment records
+- [x] `/ds:compound` runs deduplication gate (searches existing learnings before writing)
+- [x] `/ds:compound` validates YAML frontmatter against enhanced schema before writing
+- [x] `/ds:compound` writes properly frontmattered files to `docs/ds/learnings/`
+- [x] Cold start works (no `docs/ds/` directory yet — auto-created via `mkdir -p`)
+- [x] Large dataset handling: `/ds:eda` samples when >100MB
+- [x] All 6 agents have `<examples>` blocks (verified by grep)
+- [x] All 4 commands have `disable-model-invocation: true` and use `$ARGUMENTS`
+- [x] Plugin `name` is `"ds"` in plugin.json
 - [ ] Plugin installs cleanly via `/plugin install`
-- [ ] README documents all MVP components
+- [x] README documents all MVP components
 
 ### Phase 2: Full Workflow (v2.0.0)
 

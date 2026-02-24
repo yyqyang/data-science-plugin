@@ -1,77 +1,109 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with the Data Science plugin.
 
 ## Project Overview
 
-This workspace references the **Compound Engineering Plugin** repository (`compound-engineering-plugin/`), a Bun/TypeScript CLI that converts Claude Code plugins into formats for 7 other AI coding platforms (OpenCode, Codex, Droid, Pi, Copilot, Gemini, Kiro). It also hosts a plugin marketplace featuring the `compound-engineering` plugin — a collection of 29 agents, 22 commands, 19 skills, and 1 MCP server.
+A Claude Code plugin (`ds`) that brings compound engineering practices to data science and ML workflows. The plugin provides agents, commands, skills, and templates that help DS/ML teams work in a structured, compounding way -- where each project leaves behind artifacts that make future projects faster.
 
-## Build & Test Commands
+**Workflow:** `Frame -> Explore -> Experiment -> Review -> Ship -> Compound -> Repeat`
 
-```bash
-bun install                    # Install dependencies
-bun test                       # Run all tests (Bun's native test runner)
-bun run dev                    # Run CLI in dev mode
-bun run src/index.ts install ./plugins/compound-engineering --to opencode  # Local install
+**Namespace:** `/ds:` -- commands are invoked as `/ds:plan`, `/ds:eda`, etc.
+
+## Plugin Structure
+
 ```
-
-There is no separate lint command. CI runs `bun test` on push/PR via GitHub Actions.
-
-## Architecture
-
-The CLI follows a **Parse → Convert → Write** pipeline:
-
-1. **Parsers** (`src/parsers/`) read Claude plugin structure from the filesystem (markdown files with YAML frontmatter)
-2. **Converters** (`src/converters/claude-to-*.ts`) transform Claude format into target-specific types, handling tool/permission/model name mappings
-3. **Writers** (`src/targets/*.ts`) output files to each platform's expected directory structure
-
-The target registry in `src/targets/index.ts` maps each platform name to its `convert` + `write` functions via a `TargetHandler` interface. Adding a new provider means: define types in `src/types/`, implement a converter, implement a writer, register in the targets index, and add tests.
-
-### Key Directories
-
-- `src/commands/` — CLI subcommands (`convert`, `install`, `list`, `sync`) using the `citty` framework
-- `src/types/` — TypeScript type definitions for Claude and each target platform
-- `src/utils/` — Shared utilities (frontmatter parsing, file ops, symlinks)
-- `plugins/compound-engineering/` — The actual plugin content (agents, commands, skills as markdown files)
-- `tests/` — Test suite with per-target converter and writer tests; fixtures in `tests/fixtures/sample-plugin/`
-
-### Plugin Content Structure
-
-Agents, commands, and skills are markdown files with YAML frontmatter. Agents are organized by category subdirectories (`review/`, `research/`, `design/`, `workflow/`, `docs/`). Commands use a `workflows:` prefix for workflow commands to avoid collisions with Claude Code built-ins.
+.claude-plugin/plugin.json    # Plugin metadata
+agents/
+  analysis/                   # Data understanding agents
+  modeling/                   # Model-focused agents
+  review/                     # Quality and governance agents
+commands/ds/                  # Namespaced commands (subdirectory pattern)
+skills/<skill-name>/SKILL.md  # One SKILL.md per skill directory
+templates/                    # Reusable artifact templates
+```
 
 ## Versioning & Component Count Sync
 
-When adding/removing agents, commands, or skills, counts must be updated in **three places**:
-1. `plugins/compound-engineering/.claude-plugin/plugin.json` — `description` field + version bump
-2. `.claude-plugin/marketplace.json` — plugin `description` field + version
-3. `plugins/compound-engineering/README.md` — intro paragraph
+When adding or removing agents, commands, skills, or templates, update counts in **three places**:
 
-Verification:
+1. `.claude-plugin/plugin.json` -- `description` field component counts + version bump
+2. `README.md` -- component counts in the Components table
+3. `CHANGELOG.md` -- entry for the version
+
+**Version bump rules:**
+- MAJOR: Breaking changes, reorganization
+- MINOR: New agents, commands, or skills
+- PATCH: Bug fixes, doc updates, minor improvements
+
+**Verification commands:**
 ```bash
-ls plugins/compound-engineering/agents/**/*.md | wc -l
-ls plugins/compound-engineering/commands/*.md | wc -l
-ls -d plugins/compound-engineering/skills/*/ 2>/dev/null | wc -l
+ls agents/**/*.md | wc -l          # Agent count
+ls commands/ds/*.md | wc -l        # Command count
+ls -d skills/*/ 2>/dev/null | wc -l  # Skill count
+ls templates/*.md | wc -l          # Template count
 ```
 
-After changes, run `/release-docs` to regenerate the documentation site.
+## Invocation Map
 
-## Target Output Locations
+Which commands invoke which agents and skills:
 
-| Target | Output Path | Notes |
-|--------|------------|-------|
-| OpenCode | `~/.config/opencode/` | `opencode.json` is deep-merged, never overwritten wholesale |
-| Codex | `~/.codex/` | Skill descriptions truncated to 1024 chars |
-| Droid | `~/.factory/` | Claude tools mapped to Factory equivalents (`Bash`→`Execute`, `Write`→`Create`) |
-| Pi | `~/.pi/agent/` | Includes MCPorter config for interoperability |
-| Copilot | `.github/` | MCP env vars prefixed `COPILOT_MCP_` |
-| Gemini | `.gemini/` | Namespaced commands create directory structure |
-| Kiro | `.kiro/` | Only stdio MCP servers supported (HTTP skipped) |
+| Command | Agents | Skills |
+|---------|--------|--------|
+| `/ds:plan` | problem-framer | -- |
+| `/ds:eda` | data-profiler, feature-engineer | eda-checklist, target-leakage-detection |
+| `/ds:experiment` | experiment-designer, model-evaluator | split-strategy, target-leakage-detection, statistical-tests, experiment-tracking |
+| `/ds:compound` | documentation-synthesizer | -- |
+
+## Naming Conventions
+
+- **Plugin name:** `"ds"` in plugin.json (the colon is injected by Claude Code automatically)
+- **Commands:** Subdirectory pattern `commands/ds/<name>.md`. The `name:` frontmatter must NOT contain colons.
+- **Agents:** Category subdirectories `agents/<category>/<name>.md`
+- **Skills:** Kebab-case directories `skills/<skill-name>/SKILL.md`
+- **Templates:** Flat in `templates/<name>.md`
+
+## Format Requirements
+
+### Agents
+- Frontmatter: `name`, `description` (quoted, "what + when to use"), `model: inherit`
+- Must include `<examples>` block at end with 2-3 concrete invocation scenarios
+- Examples use `<example>`, `<context>`, `<user>`, `<assistant>`, `<commentary>` tags
+
+### Commands
+- Frontmatter: `name`, `description`, `argument-hint`, `disable-model-invocation: true`
+- Body uses `$ARGUMENTS` placeholder for user input
+- All commands must have `disable-model-invocation: true` (they produce file-writing side effects)
+
+### Skills
+- Frontmatter: `name` (matches directory name), `description` ("what + when to use")
+- Skills with file-writing side effects add `disable-model-invocation: true`
+
+## Output Directories
+
+All plugin output goes to `docs/ds/` in the user's project (not inside the plugin):
+
+```
+docs/ds/
+  plans/       # From /ds:plan
+  eda/         # From /ds:eda
+  experiments/ # From /ds:experiment
+  learnings/   # From /ds:compound
+```
+
+## Compounding Mechanism
+
+Learnings in `docs/ds/learnings/` use YAML frontmatter with:
+- `category`: modeling | data | features | evaluation | deployment | infrastructure | process
+- `outcome`: success | failure | mixed
+- `status`: active | superseded | deprecated
+- `findings`: structured array with insight, mechanism, impact
+- `lifecycle_stage`: framing | eda | experiment | review | deployment
+
+All commands search learnings before starting work. `/ds:compound` runs a deduplication gate.
 
 ## Conventions
 
-- **ASCII-first**: Use ASCII unless the file already contains Unicode
-- **Marketplace spec**: Only include fields from the official Claude Code plugin spec — no custom fields
-- **Skill references**: Link files with markdown links `[file.md](./references/file.md)`, never bare backticks
-- **Branching**: Create feature branches for non-trivial changes
-- **Testing**: Run `bun test` after changes to parsing, conversion, or output logic
-- **Dependencies**: Minimal — only `citty` (CLI framework) and `js-yaml` (frontmatter parsing)
+- **ASCII-first**: Use ASCII dashes (`--`) not Unicode em-dashes
+- **File references**: Use markdown links `[file.md](./path/file.md)`, not backticks
+- **Writing style**: Active voice, imperative form, concrete language
