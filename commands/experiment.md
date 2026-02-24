@@ -45,6 +45,11 @@ Invoke the `statistical-analysis` skill for:
 - **Power analysis**: Determine minimum sample size needed to detect the expected effect size
 - **Assumption planning**: Note which assumptions will need checking after results are in
 
+Invoke the `scikit-learn` skill for:
+- **Pipeline construction**: Use `references/pipelines_and_composition.md` to design preprocessing + model pipelines with `Pipeline` and `ColumnTransformer`
+- **Hyperparameter search implementation**: Use `references/model_evaluation.md` for concrete `GridSearchCV` / `RandomizedSearchCV` patterns
+- **Algorithm selection**: Use `references/quick_reference.md` for algorithm selection cheat sheets based on data characteristics
+
 If temporal data is detected, auto-invoke `time-series-validation` skill.
 
 ### 4. Leakage Check
@@ -64,6 +69,8 @@ Ask the user: "Experiment plan ready. What next?" with options:
 - Just save the plan (implement later)
 - Review plan with `/ds:review`
 
+When generating the code scaffold, use the `scikit-learn` skill's pipeline patterns (`references/pipelines_and_composition.md`) and the example scripts (`scripts/classification_pipeline.py` or `scripts/clustering_analysis.py`) as structural references.
+
 ### 7. Generate Results (if executing)
 
 After completion, generate `docs/ds/experiments/YYYY-MM-DD-<experiment-name>-result.md` from `templates/experiment-result.md` with:
@@ -74,6 +81,10 @@ After completion, generate `docs/ds/experiments/YYYY-MM-DD-<experiment-name>-res
 - Key observations
 
 Use the `model-evaluator` agent for comprehensive performance assessment.
+
+Use the `scikit-learn` skill's evaluation utilities:
+- Generate classification/regression metrics using `references/model_evaluation.md` patterns
+- Create learning curves and validation curves for overfitting diagnosis
 
 Run the `statistical-analysis` skill's assumption checks on the results:
 - Use `scripts/assumption_checks.py` to verify normality and variance homogeneity of residuals/predictions

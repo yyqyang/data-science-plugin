@@ -4,6 +4,12 @@ All notable changes to this plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.4.0] - 2026-02-24
+
+### Added
+- `scikit-learn` skill -- API patterns for preprocessing, pipelines, model selection, hyperparameter tuning, and evaluation with 6 reference files and 2 example scripts
+- `/ds:experiment` now uses `scikit-learn` for pipeline construction (step 3), code scaffold generation (step 6), and evaluation utilities (step 7)
+
 ## [1.3.0] - 2026-02-24
 
 ### Changed
