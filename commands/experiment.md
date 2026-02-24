@@ -1,5 +1,5 @@
 ---
-name: experiment
+name: ds:experiment
 description: Design an ML experiment with hypothesis, split strategy, leakage check, and evaluation plan
 argument-hint: "[experiment description or hypothesis]"
 ---

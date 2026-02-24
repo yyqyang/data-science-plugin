@@ -1,5 +1,5 @@
 ---
-name: plan
+name: ds:plan
 description: Frame a data science problem and plan the approach, surfacing relevant past learnings
 argument-hint: "[problem description or business question]"
 ---

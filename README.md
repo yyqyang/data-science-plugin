@@ -1,12 +1,31 @@
 # Data Science Plugin
 
-Data science and ML workflow tools that compound institutional knowledge. 6 agents, 4 commands, 5 skills for problem framing, EDA, experimentation, and knowledge compounding.
+Data science and ML workflow tools that compound institutional knowledge. 6 agents, 4 commands, 6 skills for problem framing, EDA, experimentation, and knowledge compounding.
 
 ## Install
 
-```bash
-/install-plugin ds
+Add the repo as a marketplace, then install:
+
 ```
+/plugin marketplace add andikarachman/data-science-plugin
+/plugin install ds@data-science-plugin
+```
+
+## Prerequisites
+
+The plugin's skills and agents use Python libraries for data analysis. Install them into your active environment:
+
+```bash
+uv pip install pandas scikit-learn scipy statsmodels numpy
+```
+
+Optional libraries (used in generated experiment code):
+
+```bash
+uv pip install xgboost lightgbm shap
+```
+
+Run `/ds:setup` to check which libraries are installed.
 
 ## Workflow
 
@@ -29,7 +48,7 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 |-----------|-------|
 | Agents | 6 |
 | Commands | 4 |
-| Skills | 5 |
+| Skills | 6 |
 | Templates | 5 |
 | MCP Servers | 1 |
 
@@ -74,6 +93,7 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 | `target-leakage-detection` | Detect temporal, direct, and group leakage in feature sets |
 | `experiment-tracking` | Standard experiment logging format with environment and reproducibility fields |
 | `statistical-tests` | Statistical test selection guide based on data type and hypothesis |
+| `setup` | Check Python environment for required DS/ML libraries and report versions |
 
 ## Templates
 

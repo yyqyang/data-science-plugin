@@ -1,5 +1,5 @@
 ---
-name: eda
+name: ds:eda
 description: Profile a dataset for structure, quality, distributions, and anomalies, then output an EDA report
 argument-hint: "[path to dataset or description of data source]"
 ---

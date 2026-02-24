@@ -1,0 +1,14 @@
+# Data Science Plugin -- Python Dependencies
+# Install with: uv pip install -r requirements.txt
+
+# Required -- used directly by plugin skills and agents
+pandas>=2.0
+scikit-learn>=1.3
+scipy>=1.11
+statsmodels>=0.14
+numpy>=1.24
+
+# Optional -- used in generated experiment code only
+# xgboost>=2.0
+# lightgbm>=4.0
+# shap>=0.43

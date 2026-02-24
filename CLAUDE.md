@@ -102,6 +102,10 @@ Learnings in `docs/ds/learnings/` use YAML frontmatter with:
 
 All commands search learnings before starting work. `/ds:compound` runs a deduplication gate.
 
+## Prerequisites
+
+The plugin requires Python 3.9+ with these libraries: pandas, scikit-learn, scipy, statsmodels, numpy. Install with `uv pip install -r requirements.txt`. Optional libraries (xgboost, lightgbm, shap) are used in generated experiment code only. Run `/ds:setup` to check the environment.
+
 ## Conventions
 
 - **ASCII-first**: Use ASCII dashes (`--`) not Unicode em-dashes

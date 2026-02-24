@@ -1,0 +1,12 @@
+{
+  "name": "data-science-plugin",
+  "owner": {
+    "name": "Andika Rachman"
+  },
+  "plugins": [
+    {
+      "name": "ds",
+      "source": "./."
+    }
+  ]
+}

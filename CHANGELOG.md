@@ -4,6 +4,13 @@ All notable changes to this plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.1.0] - 2026-02-24
+
+### Added
+- `requirements.txt` with required and optional Python dependencies
+- `setup` skill (`/ds:setup`) -- check Python environment for required libraries and report versions
+- Prerequisites section in README with `uv pip install` commands
+
 ## [1.0.0] - 2026-02-24
 
 ### Added
