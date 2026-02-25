@@ -4,6 +4,25 @@ All notable changes to this plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [2.5.0] - 2026-02-25
+
+### Added
+- `polars` skill -- Polars expression API for high-performance DataFrame operations, lazy evaluation, joins, aggregations, and I/O with 6 reference files (core concepts, operations, pandas migration, I/O guide, transformations, best practices)
+- `/ds:eda` now references `polars` for large-dataset lazy scanning (step 3), schema inspection (step 4), expression-based distribution analysis (step 5), and join patterns (step 7)
+- `/ds:preprocess` now references `polars` for I/O optimization with lazy scanning (step 2)
+- `/ds:experiment` now references `polars` for window features and join patterns (step 3) and expression-based code scaffolds (step 6)
+- `/ds:plan` now references `polars` for large-dataset handling with lazy evaluation and streaming (step 3)
+- `/ds:validate` now references `polars` for data loading (step 2)
+- `polars` added to `setup` skill optional library checks
+- `polars` added to `requirements.txt` as optional dependency
+
+### Changed
+- `data-profiler` agent now references `polars` for schema inspection and memory-efficient profiling with lazy evaluation
+- `feature-engineer` agent now references `polars` for `over()` window functions and join-based feature assembly
+- `pipeline-builder` agent now references `polars` for lazy scanning and expression-based data assessment
+- `pandas-pro` skill "Role in ds plugin" paragraph updated with `polars` boundary clarification
+- `data-preprocessing` skill "Role in ds plugin" paragraph updated with polars interop note
+
 ## [2.4.0] - 2026-02-25
 
 ### Added

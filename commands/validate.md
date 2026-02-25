@@ -25,7 +25,7 @@ If learnings are found, summarize them: "Found N prior learnings related to data
 
 ### 2. Load and Detect Data Source
 
-Detect file format from extension and load the dataset. For efficient I/O, reference the `pandas-pro` skill's `references/performance-optimization.md`:
+Detect file format from extension and load the dataset. For efficient I/O, reference the `pandas-pro` skill's `references/performance-optimization.md`. **For large datasets**, reference the `polars` skill's `references/io_guide.md` for lazy scanning:
 - **CSV** (`.csv`): `pd.read_csv()` -- specify `dtype` dict for known columns
 - **Parquet** (`.parquet`): `pd.read_parquet()`
 - **Excel** (`.xlsx`, `.xls`): `pd.read_excel()`

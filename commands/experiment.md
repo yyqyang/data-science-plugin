@@ -135,7 +135,7 @@ Invoke the `scikit-learn` skill for:
 
 When data requires pre-model preparation (deduplication, format conversion, structural cleaning) before pipeline construction, reference the `data-preprocessing` skill's `references/transformation_methods.md` for pre-model transform patterns. For in-model preprocessing inside sklearn Pipelines, continue using the `scikit-learn` skill.
 
-When the methodology involves assembling features from multiple data sources, reference the `pandas-pro` skill's `references/merging-joining.md` for merge strategies and cardinality validation. For rolling/window feature engineering, reference the `pandas-pro` skill's `references/aggregation-groupby.md` (Window Functions, Shift and Diff sections).
+When the methodology involves assembling features from multiple data sources, reference the `pandas-pro` skill's `references/merging-joining.md` for merge strategies and cardinality validation. For rolling/window feature engineering, reference the `pandas-pro` skill's `references/aggregation-groupby.md` (Window Functions, Shift and Diff sections). **For large datasets using Polars**, reference the `polars` skill's `references/transformations.md` for join patterns and `references/operations.md` for `over()` window functions.
 
 Invoke the `statsmodels` skill when the experiment involves inference or time-series:
 - **Regression with inference** (need p-values, coefficient interpretation): Use `references/linear_models.md` for OLS/WLS/GLS model selection and robust standard errors
@@ -170,7 +170,7 @@ Ask the user: "Experiment plan ready. What next?" with options:
 - Just save the plan (implement later)
 - Review plan with `/ds:review`
 
-When generating the code scaffold, use the `scikit-learn` skill's pipeline patterns (`references/pipelines_and_composition.md`) and the example scripts (`scripts/classification_pipeline.py` or `scripts/clustering_analysis.py`) as structural references. For proper pandas indexing and vectorized operations in generated code, reference the `pandas-pro` skill's `references/dataframe-operations.md` (use `.loc[]`/`.iloc[]`, avoid chained indexing). If the data requires pre-pipeline cleaning (deduplication, type coercion, structural missing data removal), include a data preparation section referencing the `data-preprocessing` skill's `scripts/transform_data.py` before the sklearn Pipeline code.
+When generating the code scaffold, use the `scikit-learn` skill's pipeline patterns (`references/pipelines_and_composition.md`) and the example scripts (`scripts/classification_pipeline.py` or `scripts/clustering_analysis.py`) as structural references. For proper pandas indexing and vectorized operations in generated code, reference the `pandas-pro` skill's `references/dataframe-operations.md` (use `.loc[]`/`.iloc[]`, avoid chained indexing). **For large datasets using Polars**, reference the `polars` skill's `references/operations.md` for expression-based code patterns (use `pl.col()`, avoid Python loops). If the data requires pre-pipeline cleaning (deduplication, type coercion, structural missing data removal), include a data preparation section referencing the `data-preprocessing` skill's `scripts/transform_data.py` before the sklearn Pipeline code.
 
 When the experiment uses statsmodels models (OLS, GLM, ARIMA), reference the `statsmodels` skill's Quick Start Guide and formula API examples in SKILL.md for code scaffold generation.
 

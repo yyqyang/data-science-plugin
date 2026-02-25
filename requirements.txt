@@ -15,6 +15,9 @@ numpy>=1.24
 # Optional -- time series ML (used by aeon skill)
 # aeon>=0.11
 
+# Optional -- high-performance DataFrame alternative (used by polars skill)
+# polars>=1.0
+
 # Optional -- used in generated experiment code only
 # xgboost>=2.0
 # lightgbm>=4.0
