@@ -133,6 +133,8 @@ Invoke the `scikit-learn` skill for:
 - **Hyperparameter search implementation**: Use `references/model_evaluation.md` for concrete `GridSearchCV` / `RandomizedSearchCV` patterns
 - **Algorithm selection**: Use `references/quick_reference.md` for algorithm selection cheat sheets based on data characteristics
 
+When data requires pre-model preparation (deduplication, format conversion, structural cleaning) before pipeline construction, reference the `data-preprocessing` skill's `references/transformation_methods.md` for pre-model transform patterns. For in-model preprocessing inside sklearn Pipelines, continue using the `scikit-learn` skill.
+
 Invoke the `statsmodels` skill when the experiment involves inference or time-series:
 - **Regression with inference** (need p-values, coefficient interpretation): Use `references/linear_models.md` for OLS/WLS/GLS model selection and robust standard errors
 - **GLM** (non-normal outcomes -- counts, binary, proportions): Use `references/glm.md` for family and link function selection
@@ -166,7 +168,7 @@ Ask the user: "Experiment plan ready. What next?" with options:
 - Just save the plan (implement later)
 - Review plan with `/ds:review`
 
-When generating the code scaffold, use the `scikit-learn` skill's pipeline patterns (`references/pipelines_and_composition.md`) and the example scripts (`scripts/classification_pipeline.py` or `scripts/clustering_analysis.py`) as structural references.
+When generating the code scaffold, use the `scikit-learn` skill's pipeline patterns (`references/pipelines_and_composition.md`) and the example scripts (`scripts/classification_pipeline.py` or `scripts/clustering_analysis.py`) as structural references. If the data requires pre-pipeline cleaning (deduplication, type coercion, structural missing data removal), include a data preparation section referencing the `data-preprocessing` skill's `scripts/transform_data.py` before the sklearn Pipeline code.
 
 When the experiment uses statsmodels models (OLS, GLM, ARIMA), reference the `statsmodels` skill's Quick Start Guide and formula API examples in SKILL.md for code scaffold generation.
 

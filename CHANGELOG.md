@@ -4,6 +4,23 @@ All notable changes to this plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [2.2.0] - 2026-02-25
+
+### Added
+- `data-preprocessing` skill -- pre-model data preparation pipelines for cleaning, validation, transformation, and ETL orchestration, with 4 reference files, 3 scripts, and 1 config template
+- `pipeline-builder` agent -- assess raw data quality and design preprocessing pipelines with temporal awareness and structural cleaning recommendations
+- `/ds:preprocess` command -- clean, validate, and transform raw data using automated preprocessing pipelines with per-step tracking and SHA-256 hashing
+- `preprocessing-report` template -- pipeline execution report with input/output summary, step log, before/after comparison, and validation results
+- `/ds:eda` step 6b now references `data-preprocessing` skill with routing guidance for pre-model vs in-model preprocessing
+- `/ds:experiment` steps 3 and 6 now reference `data-preprocessing` skill for pre-pipeline data preparation
+- `/ds:plan` step 5 now suggests `/ds:preprocess` as a next step option
+- `preprocessing` added to `lifecycle_stage` enum in `/ds:compound` and `CLAUDE.md`
+- `docs/ds/preprocessing/` added to output directories
+
+### Changed
+- `scikit-learn` skill "Role in ds plugin" paragraph updated with `data-preprocessing` boundary clarification
+- Workflow updated from `Frame -> Explore -> ...` to `Frame -> Preprocess -> Explore -> ...`
+
 ## [2.1.0] - 2026-02-24
 
 ### Added

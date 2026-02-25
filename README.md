@@ -1,6 +1,6 @@
 # Data Science Plugin
 
-Data science and ML workflow tools that compound institutional knowledge. 8 agents, 6 commands, 14 skills for problem framing, EDA, experimentation, review, deployment, and knowledge compounding.
+Data science and ML workflow tools that compound institutional knowledge. 9 agents, 7 commands, 15 skills for problem framing, preprocessing, EDA, experimentation, review, deployment, and knowledge compounding.
 
 ## Install
 
@@ -30,12 +30,13 @@ Run `/ds:setup` to check which libraries are installed.
 ## Workflow
 
 ```
-Frame -> Explore -> Experiment -> Review -> Ship -> Compound -> Repeat
+Frame -> Preprocess -> Explore -> Experiment -> Review -> Ship -> Compound -> Repeat
 ```
 
 | Command | Purpose |
 |---------|---------|
 | `/ds:plan` | Frame business questions as DS problems and plan approach |
+| `/ds:preprocess` | Clean, validate, and transform raw data with automated pipelines |
 | `/ds:eda` | Run structured exploratory data analysis |
 | `/ds:experiment` | Design and run rigorous ML experiments |
 | `/ds:review` | Peer review experiments for methodology and reproducibility |
@@ -48,21 +49,22 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 
 | Component | Count |
 |-----------|-------|
-| Agents | 8 |
-| Commands | 6 |
-| Skills | 14 |
-| Templates | 7 |
+| Agents | 9 |
+| Commands | 7 |
+| Skills | 15 |
+| Templates | 8 |
 | MCP Servers | 1 |
 
 ## Agents
 
-### Analysis (3)
+### Analysis (4)
 
 | Agent | Description |
 |-------|-------------|
 | `problem-framer` | Frame business questions as structured DS problems |
 | `data-profiler` | Profile datasets for quality, structure, and anomalies |
 | `feature-engineer` | Design and evaluate feature transformations |
+| `pipeline-builder` | Assess raw data quality and design preprocessing pipelines |
 
 ### Modeling (2)
 
@@ -84,6 +86,7 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 | Command | Description |
 |---------|-------------|
 | `/ds:plan` | Search past learnings, frame the problem, plan the approach, output a plan doc |
+| `/ds:preprocess` | Assess data quality, design and execute preprocessing pipelines, output preprocessing report |
 | `/ds:eda` | Profile data, analyze distributions, check quality, output an EDA report |
 | `/ds:experiment` | Formulate hypothesis, design methodology, check for leakage, output experiment plan and results |
 | `/ds:review` | Peer review experiments for methodology, leakage, reproducibility, and statistical validity |
@@ -108,6 +111,7 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 | `reproducibility-checklist` | Verify experiment reproducibility: seeds, versions, data hashes, environment capture |
 | `shap` | SHAP API patterns for model interpretability -- explainer selection, feature attribution, and visualization |
 | `model-card` | Generate standardized model documentation following HuggingFace and NVIDIA Model Card++ formats |
+| `data-preprocessing` | Pre-model data preparation pipelines for cleaning, validation, transformation, and ETL orchestration |
 
 ## Templates
 
@@ -119,6 +123,7 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 | `experiment-review` | Peer review assessment with methodology, leakage, and reproducibility checks |
 | `model-card` | Standardized model documentation for deployment handoff |
 | `deployment-readiness` | Deployment readiness assessment with monitoring and rollback plans |
+| `preprocessing-report` | Data preprocessing pipeline execution report with before/after metrics |
 | `postmortem` | Project learnings and retrospective |
 
 ## MCP Servers
@@ -135,6 +140,12 @@ Each cycle compounds: experiment learnings surface in future plans, error patter
 /ds:plan We need to predict customer churn for our SaaS product.
          We have 2 years of usage logs, billing data, and support tickets.
          The business wants to identify at-risk customers 30 days before they cancel.
+```
+
+### Preprocessing raw data
+
+```
+/ds:preprocess ./data/raw/customers.csv
 ```
 
 ### Exploring a dataset

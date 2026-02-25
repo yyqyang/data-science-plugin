@@ -1,0 +1,85 @@
+# Preprocessing Pipeline Configuration Template
+#
+# This template shows the structure for configuring a preprocessing pipeline.
+# In practice, pipelines are configured via Python dicts (see references/pipeline_configuration.md).
+# This YAML template serves as a reference for documenting pipeline configurations
+# in preprocessing reports.
+
+pipeline:
+  name: "example-preprocessing"
+  version: "1.0"
+
+  # Input data source
+  input:
+    path: "data/raw/customers.csv"
+    format: "csv"  # csv, parquet, excel, tsv
+    encoding: "utf-8"
+
+  # Output destination
+  output:
+    path: "data/preprocessed/customers_clean.parquet"
+    format: "parquet"
+
+  # Pipeline steps (executed in order)
+  steps:
+    - name: "deduplicate"
+      function: "deduplicate_exact"
+      params:
+        subset: null  # null = all columns
+        keep: "first"
+
+    - name: "replace_placeholders"
+      function: "replace_placeholders"
+      params:
+        placeholders:
+          - ""
+          - "N/A"
+          - "null"
+          - "unknown"
+
+    - name: "drop_constant_columns"
+      function: "drop_constant_columns"
+      params: {}
+
+    - name: "drop_high_missing_columns"
+      function: "drop_high_missing_cols"
+      params:
+        threshold: 0.9
+
+    - name: "drop_high_missing_rows"
+      function: "drop_high_missing_rows"
+      params:
+        threshold: 0.5
+
+    - name: "coerce_types"
+      function: "coerce_types"
+      params:
+        type_map:
+          age: "numeric"
+          signup_date: "datetime"
+          status: "category"
+
+    - name: "normalize_strings"
+      function: "normalize_strings"
+      params:
+        columns:
+          - "name"
+          - "email"
+          - "city"
+        case: "lower"
+
+    - name: "remove_outliers"
+      function: "remove_outliers_iqr"
+      params:
+        columns:
+          - "age"
+          - "income"
+        factor: 3.0  # 1.5 = standard, 3.0 = extreme only
+
+  # Pipeline options
+  options:
+    stop_on_failure: true
+    preserve_partial_output: true
+    compute_hashes: true
+    checkpoint_dir: null  # Set to a path to enable checkpointing
+    validation_mode: "strict"  # strict or permissive

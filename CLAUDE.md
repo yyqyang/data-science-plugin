@@ -6,7 +6,7 @@ This file provides guidance to Claude Code when working with the Data Science pl
 
 A Claude Code plugin (`ds`) that brings compound engineering practices to data science and ML workflows. The plugin provides agents, commands, skills, and templates that help DS/ML teams work in a structured, compounding way -- where each project leaves behind artifacts that make future projects faster.
 
-**Workflow:** `Frame -> Explore -> Experiment -> Review -> Ship -> Compound -> Repeat`
+**Workflow:** `Frame -> Preprocess -> Explore -> Experiment -> Review -> Ship -> Compound -> Repeat`
 
 **Namespace:** `/ds:` -- commands are invoked as `/ds:plan`, `/ds:eda`, etc.
 
@@ -51,8 +51,9 @@ Which commands invoke which agents and skills:
 | Command | Agents | Skills |
 |---------|--------|--------|
 | `/ds:plan` | problem-framer | scikit-learn, statsmodels, aeon |
-| `/ds:eda` | data-profiler, feature-engineer | eda-checklist, target-leakage-detection, exploratory-data-analysis, scikit-learn, statsmodels, matplotlib, aeon |
-| `/ds:experiment` | experiment-designer, model-evaluator | split-strategy, target-leakage-detection, statistical-analysis, scikit-learn, experiment-tracking, statsmodels, matplotlib, aeon, shap |
+| `/ds:preprocess` | pipeline-builder | data-preprocessing, scikit-learn |
+| `/ds:eda` | data-profiler, feature-engineer | eda-checklist, target-leakage-detection, exploratory-data-analysis, scikit-learn, statsmodels, matplotlib, aeon, data-preprocessing |
+| `/ds:experiment` | experiment-designer, model-evaluator | split-strategy, target-leakage-detection, statistical-analysis, scikit-learn, experiment-tracking, statsmodels, matplotlib, aeon, shap, data-preprocessing |
 | `/ds:review` | model-evaluator, reproducibility-auditor | statistical-analysis, target-leakage-detection, reproducibility-checklist, shap |
 | `/ds:ship` | deployment-readiness | model-card, shap |
 | `/ds:compound` | documentation-synthesizer | -- |
@@ -87,12 +88,13 @@ All plugin output goes to `docs/ds/` in the user's project (not inside the plugi
 
 ```
 docs/ds/
-  plans/       # From /ds:plan
-  eda/         # From /ds:eda
-  experiments/ # From /ds:experiment
-  reviews/     # From /ds:review
-  deployments/ # From /ds:ship
-  learnings/   # From /ds:compound
+  plans/          # From /ds:plan
+  preprocessing/  # From /ds:preprocess
+  eda/            # From /ds:eda
+  experiments/    # From /ds:experiment
+  reviews/        # From /ds:review
+  deployments/    # From /ds:ship
+  learnings/      # From /ds:compound
 ```
 
 ## Compounding Mechanism
@@ -102,7 +104,7 @@ Learnings in `docs/ds/learnings/` use YAML frontmatter with:
 - `outcome`: success | failure | mixed
 - `status`: active | superseded | deprecated
 - `findings`: structured array with insight, mechanism, impact
-- `lifecycle_stage`: framing | eda | experiment | review | deployment
+- `lifecycle_stage`: framing | preprocessing | eda | experiment | review | deployment
 
 All commands search learnings before starting work. `/ds:compound` runs a deduplication gate.
 

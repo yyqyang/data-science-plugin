@@ -63,7 +63,7 @@ findings:
   - insight: "Concise description of the finding"
     mechanism: hyperparameter_tuning
     impact: high            # high | medium | low
-lifecycle_stage: experiment # framing | eda | experiment | review | deployment
+lifecycle_stage: experiment # framing | preprocessing | eda | experiment | review | deployment
 supersedes: ""              # Path to learning this replaces (if any)
 related:                    # Bidirectional cross-references
   - path/to/related/artifact.md

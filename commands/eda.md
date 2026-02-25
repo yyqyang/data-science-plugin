@@ -79,6 +79,8 @@ After distribution analysis, use the `feature-engineer` agent to suggest feature
 
 After suggestions are generated, reference the `scikit-learn` skill's `references/preprocessing.md` for concrete implementation patterns (scaling, encoding, imputation) matching the identified data characteristics.
 
+**Preprocessing routing guidance:** For in-model preprocessing (scaling, encoding, imputation inside an sklearn Pipeline that participates in cross-validation), use the `scikit-learn` skill. For full pre-model ETL preprocessing (deduplication, format conversion, schema validation, structural cleaning), recommend running `/ds:preprocess` first. Reference the `data-preprocessing` skill's `references/transformation_methods.md` for pre-model transform patterns when structural data issues remain.
+
 ### 7. Relationship Analysis (tabular path)
 
 Correlation matrix for numeric features, association tests for categoricals, target correlation ranking.
