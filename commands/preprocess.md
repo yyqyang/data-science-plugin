@@ -1,5 +1,5 @@
 ---
-name: ds:preprocess
+name: ds-preprocess
 description: Clean, validate, and transform raw data using automated preprocessing pipelines
 argument-hint: "[path to dataset or description of data source]"
 disable-model-invocation: true

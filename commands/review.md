@@ -1,5 +1,5 @@
 ---
-name: ds:review
+name: ds-review
 description: Peer review an ML experiment for methodology, leakage, reproducibility, and statistical validity
 argument-hint: "[path to experiment result or experiment name]"
 disable-model-invocation: true

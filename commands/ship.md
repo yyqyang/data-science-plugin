@@ -1,5 +1,5 @@
 ---
-name: ds:ship
+name: ds-ship
 description: Assess deployment readiness of a trained model and generate model card and deployment documentation
 argument-hint: "[path to experiment result, model path, or model description]"
 disable-model-invocation: true

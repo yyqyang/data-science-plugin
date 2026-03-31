@@ -1,5 +1,5 @@
 ---
-name: ds:compound
+name: ds-compound
 description: Extract and categorize learnings from completed experiments into docs/ds/learnings/ for future retrieval
 argument-hint: "[description of what was learned, or path to experiment report]"
 disable-model-invocation: true

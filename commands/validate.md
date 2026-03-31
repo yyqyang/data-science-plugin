@@ -1,5 +1,5 @@
 ---
-name: ds:validate
+name: ds-validate
 description: Run data quality validation using formal expectation suites, dbt tests, or data contracts
 argument-hint: "[path to dataset, expectation suite, or data contract]"
 disable-model-invocation: true
